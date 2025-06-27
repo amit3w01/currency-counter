@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מחשבון מטבעות</title>
+    <title>מחשבון מטבעות וחומרי יוקרה</title>
     <style>
         :root {
             --primary: #6c5ce7;
@@ -17,6 +17,13 @@
             --calc-btn: #f1f3f9;
             --calc-operator: #a29bfe;
             --calc-equals: #6c5ce7;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --diamond: #b9f2ff;
+            --sapphire: #0f52ba;
+            --amethyst: #9966cc;
+            --pearl: #f8f8ff;
+            --ruby: #e0115f;
         }
         
         * {
@@ -38,9 +45,9 @@
         
         .app-container {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1200px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 25px;
         }
         
@@ -227,7 +234,107 @@
             aspect-ratio: auto;
         }
         
+        /* Precious Materials Calculator Styles */
+        .materials-calculator {
+            background: var(--card);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .materials-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .materials-body {
+            padding: 25px;
+        }
+        
+        .material-group {
+            margin-bottom: 15px;
+        }
+        
+        .material-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .material-option:hover {
+            background: rgba(108, 92, 231, 0.05);
+        }
+        
+        .material-option input[type="radio"] {
+            margin-left: 10px;
+        }
+        
+        .material-option label {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .material-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+        
+        .gold-icon { background: var(--gold); }
+        .silver-icon { background: var(--silver); }
+        .diamond-icon { background: var(--diamond); }
+        .sapphire-icon { background: var(--sapphire); }
+        .amethyst-icon { background: var(--amethyst); }
+        .pearl-icon { background: var(--pearl); border: 1px solid #ddd; }
+        .ruby-icon { background: var(--ruby); }
+        
+        .material-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .material-input input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            text-align: right;
+        }
+        
+        .material-result {
+            background: rgba(108, 92, 231, 0.05);
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+            margin-top: 20px;
+            border: 1px solid rgba(108, 92, 231, 0.1);
+        }
+        
+        .material-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 8px 0;
+        }
+        
         /* Responsive */
+        @media (max-width: 1024px) {
+            .app-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
         @media (max-width: 768px) {
             .app-container {
                 grid-template-columns: 1fr;
@@ -245,11 +352,11 @@
         }
         
         @media (max-width: 480px) {
-            .converter-body, .calculator-body {
+            .converter-body, .calculator-body, .materials-body {
                 padding: 20px;
             }
             
-            .result-amount {
+            .result-amount, .material-value {
                 font-size: 1.5rem;
             }
             
@@ -415,6 +522,93 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Precious Materials Calculator -->
+        <div class="materials-calculator">
+            <div class="materials-header">
+                <h1>מחשבון חומרי יוקרה</h1>
+                <p>חישוב ערך בזק"ש (ILS)</p>
+            </div>
+            
+            <div class="materials-body">
+                <div class="material-group">
+                    <h3>בחר חומר:</h3>
+                    
+                    <div class="material-option">
+                        <input type="radio" id="gold" name="material" value="gold" checked>
+                        <label for="gold">
+                            <span class="material-icon gold-icon"></span>
+                            זהב (גרם)
+                        </label>
+                    </div>
+                    
+                    <div class="material-option">
+                        <input type="radio" id="silver" name="material" value="silver">
+                        <label for="silver">
+                            <span class="material-icon silver-icon"></span>
+                            כסף (גרם)
+                        </label>
+                    </div>
+                    
+                    <div class="material-option">
+                        <input type="radio" id="diamond" name="material" value="diamond">
+                        <label for="diamond">
+                            <span class="material-icon diamond-icon"></span>
+                            יהלום (קראט)
+                        </label>
+                    </div>
+                    
+                    <div class="material-option">
+                        <input type="radio" id="sapphire" name="material" value="sapphire">
+                        <label for="sapphire">
+                            <span class="material-icon sapphire-icon"></span>
+                            ספיר (קראט)
+                        </label>
+                    </div>
+                    
+                    <div class="material-option">
+                        <input type="radio" id="amethyst" name="material" value="amethyst">
+                        <label for="amethyst">
+                            <span class="material-icon amethyst-icon"></span>
+                            אחלמה (קראט)
+                        </label>
+                    </div>
+                    
+                    <div class="material-option">
+                        <input type="radio" id="pearl" name="material" value="pearl">
+                        <label for="pearl">
+                            <span class="material-icon pearl-icon"></span>
+                            פנינה (יחידה)
+                        </label>
+                    </div>
+                    
+                    <div class="material-option">
+                        <input type="radio" id="ruby" name="material" value="ruby">
+                        <label for="ruby">
+                            <span class="material-icon ruby-icon"></span>
+                            אודם (קראט)
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="material-input">
+                    <input type="number" id="material-amount" placeholder="הזן כמות" min="0" step="0.01">
+                    <button class="convert-btn" id="calculate-material">חשב</button>
+                </div>
+                
+                <div class="material-result" id="material-result">
+                    <div class="material-value" id="material-value">0.00</div>
+                    <div class="result-text">
+                        <span id="material-description">0 גרם זהב</span> = <span id="material-ils">0 ILS</span>
+                    </div>
+                    <div class="rate-info" id="material-rate-info">מחיר יחידה: 1 גרם זהב = 250 ILS</div>
+                </div>
+                
+                <div class="update-info">
+                    מחירים מעודכנים ל: <span id="material-update-date">יוני 2023</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -455,7 +649,6 @@
                 LRD: 1.28, ALL: 0.63, LBP: 99.26, XOF: 4.05, MGA: 29.86,
                 MDL: 0.12, MZN: 0.42, EGP: 0.20
             },
-            // Add similar rate objects for all other base currencies
             VEF: {
                 USD: 0.028, EUR: 0.026, ILS: 0.10, GBP: 0.022, JPY: 4.18,
                 VEF: 1, RUB: 2.55, INR: 2.30, AUD: 0.042, ZAR: 0.51,
@@ -470,7 +663,17 @@
                 LRD: 2.09, ALL: 1.02, LBP: 162.25, XOF: 6.62, MGA: 48.84,
                 MDL: 0.19, MZN: 0.69, EGP: 0.33
             }
-            // Continue adding rates for all other currencies...
+        };
+        
+        // Precious materials rates (per unit in ILS)
+        const materialRates = {
+            gold: { rate: 250, unit: 'גרם', name: 'זהב' },
+            silver: { rate: 3.5, unit: 'גרם', name: 'כסף' },
+            diamond: { rate: 10000, unit: 'קראט', name: 'יהלום' },
+            sapphire: { rate: 5000, unit: 'קראט', name: 'ספיר' },
+            amethyst: { rate: 800, unit: 'קראט', name: 'אחלמה' },
+            pearl: { rate: 1200, unit: 'יחידה', name: 'פנינה' },
+            ruby: { rate: 7500, unit: 'קראט', name: 'אודם' }
         };
         
         // DOM Elements - Converter
@@ -488,6 +691,16 @@
         
         // DOM Elements - Calculator
         const calcDisplay = document.getElementById('calc-display');
+        
+        // DOM Elements - Materials Calculator
+        const materialAmount = document.getElementById('material-amount');
+        const calculateMaterialBtn = document.getElementById('calculate-material');
+        const materialResult = document.getElementById('material-result');
+        const materialValue = document.getElementById('material-value');
+        const materialDescription = document.getElementById('material-description');
+        const materialILS = document.getElementById('material-ils');
+        const materialRateInfo = document.getElementById('material-rate-info');
+        const materialUpdateDate = document.getElementById('material-update-date');
         
         // Currency Converter Functions
         function convertCurrency() {
@@ -588,12 +801,57 @@
             }
         }
         
+        // Materials Calculator Functions
+        function calculateMaterialValue() {
+            const amount = parseFloat(materialAmount.value);
+            const selectedMaterial = document.querySelector('input[name="material"]:checked').value;
+            const material = materialRates[selectedMaterial];
+            
+            if (!amount || isNaN(amount)) {
+                alert('אנא הזן כמות תקינה');
+                return;
+            }
+            
+            const value = (amount * material.rate).toFixed(2);
+            const formattedValue = parseFloat(value).toLocaleString('he-IL', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+            
+            materialValue.textContent = formattedValue;
+            materialDescription.textContent = `${amount} ${material.unit} ${material.name}`;
+            materialILS.textContent = `${formattedValue} ILS`;
+            materialRateInfo.textContent = `מחיר יחידה: 1 ${material.unit} ${material.name} = ${material.rate.toLocaleString('he-IL')} ILS`;
+            
+            materialResult.style.display = 'block';
+        }
+        
+        // Update material rates display when selection changes
+        document.querySelectorAll('input[name="material"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const material = materialRates[this.value];
+                materialRateInfo.textContent = `מחיר יחידה: 1 ${material.unit} ${material.name} = ${material.rate.toLocaleString('he-IL')} ILS`;
+                materialAmount.placeholder = `הזן ${material.unit}`;
+            });
+        });
+        
+        // Set current date for materials
+        const now = new Date();
+        materialUpdateDate.textContent = now.toLocaleDateString('he-IL', { month: 'long', year: 'numeric' });
+        
         // Event Listeners
         convertBtn.addEventListener('click', convertCurrency);
         swapBtn.addEventListener('click', swapCurrencies);
         amountInput.addEventListener('keyup', (e) => {
             if (e.key === 'Enter') {
                 convertCurrency();
+            }
+        });
+        
+        calculateMaterialBtn.addEventListener('click', calculateMaterialValue);
+        materialAmount.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                calculateMaterialValue();
             }
         });
         
